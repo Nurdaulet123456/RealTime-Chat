@@ -7,6 +7,8 @@ const HospitalIcon =  require('../assets/hospital.png')
 const LogoutIcon = require("../assets/logout.png");
 
 
+const cookies = new Cookies();
+
 const SideBar = ({ logout }: any) => (
     <div className="channel-list__sidebar">
         <div className="channel-list__sidebar__icon1">
@@ -29,9 +31,22 @@ const CompanyHeader = () => (
 )
 
 const ChannelListContainer: React.FC = () => {
+
+  const logout = () => {
+    cookies.remove('token');
+    cookies.remove('userId')
+    cookies.remove('username')
+    cookies.remove('fullName')
+    cookies.remove('avatarURL')
+    cookies.remove('phoneNumber')
+    cookies.remove('hashPassword')
+
+    window.location.reload();
+  }
+
   return (
     <>
-      <SideBar />
+      <SideBar logout={logout}/>
 
       <div className="channel-list__list__wrapper">
         <CompanyHeader />
